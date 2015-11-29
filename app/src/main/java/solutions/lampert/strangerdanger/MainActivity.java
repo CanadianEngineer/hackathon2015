@@ -42,5 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
+        btn_toOpponentsView.setOnClickListener(handler_toOpponentsView);
     }
 }
