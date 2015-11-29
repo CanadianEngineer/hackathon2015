@@ -72,6 +72,8 @@ public class Connection{
             m_activity.registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
         }
 
+        mBluetoothAdapter.startDiscovery();
+
 
 
         return deviceText;
