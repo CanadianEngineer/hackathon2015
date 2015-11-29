@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView deviceList = (TextView)findViewById(R.id.testText);
 //        deviceList.setText("Text to set");
-        c.getDeviceList(deviceList);
+//        c.getDeviceList(deviceList);
 
         // Setting button action listeners
 

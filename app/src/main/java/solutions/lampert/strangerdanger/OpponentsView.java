@@ -6,6 +6,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import solutions.lampert.strangerdanger.backend.Connection;
 
 public class OpponentsView extends AppCompatActivity {
 
@@ -15,6 +19,14 @@ public class OpponentsView extends AppCompatActivity {
         setContentView(R.layout.activity_opponents_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Connection c = new Connection(this);
+
+        //FInding elements on page
+        ListView lv_opponents = (ListView) findViewById(R.id.opponents_listView);
+
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.opponents_listView, c.getBTAddresses());
     }
 
 }
+

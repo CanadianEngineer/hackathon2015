@@ -16,38 +16,40 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
  * Created by andrew on 11/28/15.
  */
 public class Connection{
+    private AppCompatActivity m_activity;
+    private final static Intent REQUEST_ENABLE_BT = new Intent();
     private ArrayList<String> m_devices;
 
-    private final static Intent REQUEST_ENABLE_BT = new Intent();
-    private AppCompatActivity m_activity;
+    private BluetoothAdapter m_btAdapter;
 
     public Connection(AppCompatActivity activity){
         m_activity = activity;
+        setupBTAdapter();
     }
 
     void updateDeviceList(){
         // Send query to server to get a list of devices
     }
 
-    public String getDeviceList(final TextView deviceList){
-        deviceList.setText("Looking for devices");
-        String deviceText = "";
-
+    public void setupBTAdapter(){
         // Getting bluetooth adapter
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
+        m_btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (m_btAdapter == null) {
             // Device does not support Bluetooth
         }
 
-        // Making sure BT is enabled
-
         //TODO: Check to see if BT is enabled
 
-        if (!mBluetoothAdapter.isEnabled()) {
-            deviceList.setText("BT not enabled");
+        if (!m_btAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 //            startActivityForResult(m_activity, REQUEST_ENABLE_BT);
         }
+    }
+
+
+
+    public String getDeviceList_t(final TextView deviceList){
+        setupBTAdapter();
 
         // Find devices in area
 
@@ -73,10 +75,29 @@ public class Connection{
             m_activity.registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
         }
 
-        mBluetoothAdapter.startDiscovery();
+        m_btAdapter.startDiscovery();
 
+        return "";
+    }
 
+    public String[] getBTAddresses(){
+        final ArrayList<String> addresses = new ArrayList<String>();
 
-        return deviceText;
+        BroadcastReceiver mReceiver = new BroadcastReceiver() {
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    addresses.add(device.getAddress());
+                }
+            }
+        };
+        // Register the BroadcastReceiver
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        if(m_activity != null){
+            m_activity.registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+        }
+
+        return (String[])addresses.toArray();
     }
 }
