@@ -22,10 +22,10 @@ public class OpponentsView extends AppCompatActivity {
 
         Connection c = new Connection(this);
 
-        //FInding elements on page
+        //Finding elements on page
         ListView lv_opponents = (ListView) findViewById(R.id.opponents_listView);
 
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.opponents_listView, c.getBTAddresses());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, c.getBTAddresses());
     }
 
 }
