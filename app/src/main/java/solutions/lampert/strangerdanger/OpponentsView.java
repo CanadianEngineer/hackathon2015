@@ -25,12 +25,13 @@ public class OpponentsView extends AppCompatActivity {
         Connection c = new Connection(this);
 
         //Finding elements on page
-        ListView lv_opponents = (ListView) findViewById(R.id.opponents_listView);
+        final ListView lv_opponents = (ListView) findViewById(R.id.opponents_listView);
 
         lv_opponents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("Temp", "View: " + view);
+//                Log.d("Temp", "View: " + view.getText());
+                Log.d("Temp", lv_opponents.getItemAtPosition(position).toString());
                 Log.d("Temp", "Position: " + position);
                 Log.d("Temp", "id: " + id);
             }
