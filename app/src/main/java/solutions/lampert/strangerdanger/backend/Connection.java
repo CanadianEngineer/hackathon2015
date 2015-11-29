@@ -61,7 +61,8 @@ public class Connection{
                     // Get the BluetoothDevice object from the Intent
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     // Add the name and address to an array adapter to show in a ListView
-                    deviceList.setText(deviceList.getText() + device.getName() + "\n" + device.getAddress());
+//                    CharSequence oldText = deviceList.getText();
+                    deviceList.setText(deviceList.getText().toString() + device.getName() + "\n" + device.getAddress());
                 }
             }
         };
