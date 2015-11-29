@@ -28,11 +28,11 @@ public class Connection {
                 // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // Add the name and address to an array adapter to show in a ListView
-                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+//                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
             }
         }
     };
     // Register the BroadcastReceiver
     IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-    registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+//    registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
 }
