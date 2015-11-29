@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="solutions.lampert.strangerdanger.MainActivity">
 
+<<<<<<< HEAD
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,4 +20,10 @@
             android:layout_height="match_parent"></TableRow>
     </TableRow>
 
+=======
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tindario" />
+>>>>>>> f1c2ff98b5ea85d97b81398dfde95ffc8d746acd
 </RelativeLayout>
