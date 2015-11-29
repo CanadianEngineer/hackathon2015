@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
         Connection c = new Connection();
 
-        TextView test = (TextView)findViewById(R.id.testText);
-        test.setText("Text to set");
+
+
+        TextView deviceList = (TextView)findViewById(R.id.testText);
+        deviceList.setText("Text to set");
     }
 }
