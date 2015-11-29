@@ -32,8 +32,6 @@ public class OpponentsView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Log.d("Temp", "View: " + view.getText());
                 Log.d("Temp", lv_opponents.getItemAtPosition(position).toString());
-                Log.d("Temp", "Position: " + position);
-                Log.d("Temp", "id: " + id);
             }
         });
 
