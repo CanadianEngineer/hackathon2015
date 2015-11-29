@@ -15,11 +15,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Connection c = new Connection();
+        Connection c = new Connection(this);
 
 
 
         TextView deviceList = (TextView)findViewById(R.id.testText);
-        deviceList.setText("Text to set");
+//        deviceList.setText("Text to set");
+        c.getDeviceList(deviceList);
     }
 }

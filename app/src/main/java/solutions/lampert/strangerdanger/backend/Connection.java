@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,16 +15,22 @@ import static android.support.v4.app.ActivityCompat.startActivityForResult;
 /**
  * Created by andrew on 11/28/15.
  */
-public class Connection {
+public class Connection{
     private ArrayList<String> m_devices;
 
     private final static Intent REQUEST_ENABLE_BT = new Intent();
+    private AppCompatActivity m_activity;
+
+    public Connection(AppCompatActivity activity){
+        m_activity = activity;
+    }
 
     void updateDeviceList(){
         // Send query to server to get a list of devices
     }
 
-    String getDeviceList(final TextView deviceList){
+    public String getDeviceList(final TextView deviceList){
+        deviceList.setText("Looking for devices");
         String deviceText = "";
 
         // Getting bluetooth adapter
@@ -36,10 +43,11 @@ public class Connection {
 
         //TODO: Check to see if BT is enabled
 
-//        if (!mBluetoothAdapter.isEnabled()) {
-//            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-//        }
+        if (!mBluetoothAdapter.isEnabled()) {
+            deviceList.setText("BT not enabled");
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(m_activity, REQUEST_ENABLE_BT);
+        }
 
         // Find devices in area
 
@@ -48,6 +56,7 @@ public class Connection {
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
                 // When discovery finds a device
+                deviceList.setText("Device Found: ");
                 if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                     // Get the BluetoothDevice object from the Intent
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -58,7 +67,10 @@ public class Connection {
         };
         // Register the BroadcastReceiver
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//        registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+//        mBluetoothAdapter.
+        if(m_activity != null){
+            m_activity.registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+        }
 
 
 
