@@ -14,25 +14,11 @@ import java.util.ArrayList;
 public class Connection {
 
     private ArrayList<String> m_devices;
+    private String m_deviceText;
 
     void updateDeviceList(){
         // Send query to server to get a list of devices
     }
 
-    // Create a BroadcastReceiver for ACTION_FOUND
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            // When discovery finds a device
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                // Get the BluetoothDevice object from the Intent
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                // Add the name and address to an array adapter to show in a ListView
-//                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-            }
-        }
-    };
-    // Register the BroadcastReceiver
-    IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//    registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+
 }
