@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,58 +49,33 @@ public class Connection{
         }
     }
 
+    public void getBTAddresses(ListView lv_opponents){
 
+        final ArrayList<String> addresses = new ArrayList<String>();
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(m_activity, android.R.layout.simple_list_item_1, addresses);
 
-    public String getDeviceList_t(final TextView deviceList){
-        setupBTAdapter();
+        lv_opponents.setAdapter(arrayAdapter);
 
-        // Find devices in area
-
-        // Create a BroadcastReceiver for ACTION_FOUND
         BroadcastReceiver mReceiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
-                // When discovery finds a device
-                deviceList.setText("Device Found: ");
                 if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                    // Get the BluetoothDevice object from the Intent
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    // Add the name and address to an array adapter to show in a ListView
-//                    CharSequence oldText = deviceList.getText();
-                    deviceList.setText(deviceList.getText().toString() + device.getName() + "\n" + device.getAddress());
+                    arrayAdapter.add(device.getAddress());
+
+                    Log.d("conn", "Found new device: " + device.getAddress());
+
+                    arrayAdapter.notifyDataSetChanged();
                 }
             }
         };
         // Register the BroadcastReceiver
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//        mBluetoothAdapter.
         if(m_activity != null){
             m_activity.registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
         }
 
         m_btAdapter.startDiscovery();
 
-        return "";
-    }
-
-    public String[] getBTAddresses(){
-        final ArrayList<String> addresses = new ArrayList<String>();
-
-        BroadcastReceiver mReceiver = new BroadcastReceiver() {
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    addresses.add(device.getAddress());
-                }
-            }
-        };
-        // Register the BroadcastReceiver
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        if(m_activity != null){
-            m_activity.registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
-        }
-
-        return (String[])addresses.toArray();
     }
 }

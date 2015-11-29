@@ -5,7 +5,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,7 +27,17 @@ public class OpponentsView extends AppCompatActivity {
         //Finding elements on page
         ListView lv_opponents = (ListView) findViewById(R.id.opponents_listView);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, c.getBTAddresses());
+        lv_opponents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Temp", "View: " + view);
+                Log.d("Temp", "Position: " + position);
+                Log.d("Temp", "id: " + id);
+            }
+        });
+
+        c.getBTAddresses(lv_opponents);
+
     }
 
 }
