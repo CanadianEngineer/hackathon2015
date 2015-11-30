@@ -21,7 +21,8 @@
         <activity
             android:name=".OpponentsView"
             android:label="@string/title_activity_opponents_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".game_press_yes"></activity>
     </application>
 
 </manifest>
